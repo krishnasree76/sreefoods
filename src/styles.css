@@ -1,0 +1,141 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-ivory: var(--ivory);
+  --color-maroon: var(--maroon);
+  --color-maroon-deep: var(--maroon-deep);
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Brand */
+  --maroon: oklch(0.36 0.11 18);            /* #6A1B2E */
+  --maroon-deep: oklch(0.27 0.09 18);
+  --gold: oklch(0.74 0.13 80);              /* #C9A14A */
+  --gold-soft: oklch(0.86 0.07 85);
+  --ivory: oklch(0.975 0.012 85);           /* #F8F5F0 */
+
+  --background: var(--ivory);
+  --foreground: oklch(0.22 0.03 30);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+  --primary: var(--maroon);
+  --primary-foreground: var(--ivory);
+  --secondary: oklch(0.94 0.02 70);
+  --secondary-foreground: var(--maroon-deep);
+  --muted: oklch(0.94 0.015 70);
+  --muted-foreground: oklch(0.45 0.03 40);
+  --accent: var(--gold);
+  --accent-foreground: var(--maroon-deep);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.88 0.02 70);
+  --input: oklch(0.9 0.02 70);
+  --ring: var(--gold);
+
+  --shadow-soft: 0 10px 30px -12px color-mix(in oklab, var(--maroon) 25%, transparent);
+  --shadow-gold: 0 0 0 1px color-mix(in oklab, var(--gold) 40%, transparent), 0 20px 40px -20px color-mix(in oklab, var(--gold) 35%, transparent);
+  --gradient-maroon: linear-gradient(135deg, var(--maroon-deep), var(--maroon));
+  --gradient-gold: linear-gradient(135deg, oklch(0.82 0.13 85), var(--gold));
+  --gradient-ivory: radial-gradient(ellipse at top, oklch(0.99 0.008 85), var(--ivory) 60%);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--gradient-ivory);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.01em; }
+
+  ::selection { background: var(--gold); color: var(--maroon-deep); }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .text-maroon { color: var(--maroon); }
+  .text-gold { color: var(--gold); }
+  .bg-maroon { background-color: var(--maroon); }
+  .bg-ivory { background-color: var(--ivory); }
+  .bg-gold { background-color: var(--gold); }
+  .bg-gradient-maroon { background-image: var(--gradient-maroon); }
+  .bg-gradient-gold { background-image: var(--gradient-gold); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-gold { box-shadow: var(--shadow-gold); }
+  .glass {
+    background: color-mix(in oklab, var(--ivory) 70%, transparent);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+  }
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .kollam-stroke { stroke: var(--maroon); fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .gold-stroke { stroke: var(--gold); fill: none; stroke-linecap: round; }
+
+  @keyframes draw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes float-up {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-120vh) scale(0.6); opacity: 0; }
+  }
+  @keyframes spin-slow {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  .animate-draw { stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: draw 6s ease-out forwards; }
+  .animate-float-up { animation: float-up linear infinite; }
+  .animate-spin-slow { animation: spin-slow 60s linear infinite; }
+  .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+}
